@@ -3,12 +3,12 @@
 const os = require("os");
 const path = require("path");
 const fs = require("fs");
-const configPaths = require("./paths.json");
+const configPaths = require("./configs/paths.json");
 
 const root = os.homedir();
 
-const SETTINGS_FILE = "settings.json";
-const KEYBINDINGS_FILE = "keybindings.json";
+const SETTINGS_FILE = "configs/settings.json";
+const KEYBINDINGS_FILE = "configs/keybindings.json";
 
 /**
  * 1. get home dir
@@ -17,7 +17,7 @@ const KEYBINDINGS_FILE = "keybindings.json";
  */
 const args = process.argv.length > 0 && process.argv.slice(2);
 // user input doesnt work atm, not sure I'll even keep it.
-const userInputVsCodeConfigsDir = args[0] || __dirname;
+const userInputVsCodeConfigsDir = args[0];
 
 const keybindings = path.join(__dirname, KEYBINDINGS_FILE);
 const settings = path.join(__dirname, SETTINGS_FILE);
@@ -32,7 +32,6 @@ const vscodeSettingsLocation = path.join(
   userInputVsCodeConfigsDir || configPaths.settings
 );
 
-console.log(settings, "to", vscodeSettingsLocation)
 // perform move
 fs.copyFileSync(keybindings, vscodeKeybindingsLocation);
 fs.copyFileSync(settings, vscodeSettingsLocation);
