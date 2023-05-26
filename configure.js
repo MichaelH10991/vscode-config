@@ -32,6 +32,7 @@ const vscodeSettingsLocation = path.join(
   userInputVsCodeConfigsDir || configPaths.settings
 );
 
+console.log(settings, "to", vscodeSettingsLocation)
 // perform move
 fs.copyFileSync(keybindings, vscodeKeybindingsLocation);
 fs.copyFileSync(settings, vscodeSettingsLocation);
