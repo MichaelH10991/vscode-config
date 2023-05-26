@@ -1,5 +1,6 @@
 #!/bin/bash
-ls
+git s
+
 git add .
 
 git commit -m "updating configs"
