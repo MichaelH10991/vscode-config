@@ -1,0 +1,15 @@
+{
+  "workbench.colorTheme": "Default Dark+",
+  "window.zoomLevel": -0.5,
+  "workbench.editor.untitled.hint": "hidden",
+  "files.autoSave": "onFocusChange",
+  // --- prettier config start ---
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "editor.tabSize": 2,
+  "editor.accessibilitySupport": "off"
+  // --- prettier config end ---
+}
