@@ -1,7 +1,6 @@
 #!/bin/bash
 ls
-git add keybindings.json
-git add settings.json
+git add .
 
 git commit -m "updating configs"
 

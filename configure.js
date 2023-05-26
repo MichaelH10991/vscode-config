@@ -22,8 +22,15 @@ const userInputVsCodeConfigsDir = args[0] || __dirname;
 const keybindings = path.join(__dirname, KEYBINDINGS_FILE);
 const settings = path.join(__dirname, SETTINGS_FILE);
 
-const vscodeKeybindingsLocation = path.join(root, configPaths.keybindings);
-const vscodeSettingsLocation = path.join(root, configPaths.settings);
+const vscodeKeybindingsLocation = path.join(
+  root,
+  userInputVsCodeConfigsDir || configPaths.keybindings
+);
+
+const vscodeSettingsLocation = path.join(
+  root,
+  userInputVsCodeConfigsDir || configPaths.settings
+);
 
 // perform move
 fs.copyFileSync(keybindings, vscodeKeybindingsLocation);
