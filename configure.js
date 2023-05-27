@@ -7,8 +7,8 @@ const configPaths = require("./configs/paths.json");
 
 const root = os.homedir();
 
-const SETTINGS_FILE = "configs/settings.json";
-const KEYBINDINGS_FILE = "configs/keybindings.json";
+const CONFIGS_DIR = "configs";
+const CONFIGS = ["settings", "keybindings"];
 
 /**
  * 1. get home dir
@@ -16,22 +16,28 @@ const KEYBINDINGS_FILE = "configs/keybindings.json";
  * 3. move file to homedir + path
  */
 const args = process.argv.length > 0 && process.argv.slice(2);
-// user input doesnt work atm, not sure I'll even keep it.
+// user input doesnt really work atm, not sure I'll even keep it.
 const userInputVsCodeConfigsDir = args[0];
 
-const keybindings = path.join(__dirname, KEYBINDINGS_FILE);
-const settings = path.join(__dirname, SETTINGS_FILE);
+const paths = CONFIGS.map((config) => ({
+  name: config,
+  currentPath: path.join(__dirname, CONFIGS_DIR, config.concat(".json")),
+  destinationPath: path.join(
+    root,
+    userInputVsCodeConfigsDir || configPaths[config]
+  ),
+}));
 
-const vscodeKeybindingsLocation = path.join(
-  root,
-  userInputVsCodeConfigsDir || configPaths.keybindings
-);
+const copyFiles = () => {
+  for (let i = 0; i < paths.length; i++) {
+    const { name, currentPath, destinationPath } = paths[i];
+    console.log(`Moving ${name} to ${destinationPath}`);
+    try {
+      fs.copyFileSync(currentPath, destinationPath);
+    } catch (error) {
+      throw new Error(`Error moving ${name}`);
+    }
+  }
+};
 
-const vscodeSettingsLocation = path.join(
-  root,
-  userInputVsCodeConfigsDir || configPaths.settings
-);
-
-// perform move
-fs.copyFileSync(keybindings, vscodeKeybindingsLocation);
-fs.copyFileSync(settings, vscodeSettingsLocation);
+copyFiles();
